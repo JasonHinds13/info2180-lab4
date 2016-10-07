@@ -15,4 +15,13 @@ window.onload = function(){
 		    changeAll();
 		};
 	}
+
+	//Exercize 3
+	var end = document.querySelector("#end");
+
+	end.onmouseover = function(){
+		if(boundaries[0].className !== "boundary youlose"){
+			alert("You Win");
+		}
+	}
 };

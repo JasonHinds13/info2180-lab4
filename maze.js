@@ -5,13 +5,14 @@ window.onload = function(){
     //Function to change all walls to class youlose
 	var changeAll = function(){
 		for(var i=0; i < boundaries.length; i++){
-		    boundaries[i].className += " youlose";
+			if(boundaries[i].className == "boundary"){
+		        boundaries[i].className += " youlose";
+		    }
 	    }
 	}
 
 	for(var i=0; i < boundaries.length; i++){
 		boundaries[i].onmouseover = function(){
-		    //this.className += " youlose";
 		    changeAll();
 		};
 	}
@@ -23,5 +24,18 @@ window.onload = function(){
 		if(boundaries[0].className !== "boundary youlose"){
 			alert("You Win");
 		}
+	}
+
+	//Exercize 4
+	var start = document.querySelector("#start");
+
+	var reset = function(){
+		for(var i=0; i < boundaries.length; i++){
+		    boundaries[i].className = "boundary";
+	    }
+	}
+
+	start.onclick = function(){
+		reset();
 	}
 };

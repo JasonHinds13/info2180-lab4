@@ -20,7 +20,7 @@ window.onload = function(){
 
 	for(var i=0; i < boundaries.length; i++){
 		boundaries[i].onmouseover = function(){
-		    changeAll();
+		    if (win != true){ changeAll(); }
 		};
 	}
 

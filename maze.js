@@ -1,5 +1,20 @@
 window.onload = function(){
 	var win = null;
+	var sec = 0; //track time in seconds
+	var first = true; //first play where you hover to start
+
+	//timer function
+	var timer = function(){
+		var interval = setInterval(function(){
+		    if (win == null){
+			    sec++;
+			    status.innerHTML = "Time Taken: "+sec+" seconds";
+		    }
+		    else{
+		    	clearInterval(interval);
+		    }
+		}, 1000);
+	};
 
 	//Exercize 2
 	var boundaries = document.querySelectorAll(".boundary");
@@ -13,9 +28,10 @@ window.onload = function(){
 			if(boundaries[i].className == "boundary"){
 		        boundaries[i].className += " youlose";
 		    }
-		    status.innerHTML = "You Lose!";
-		    win = false;
 	    }
+	    status.innerHTML = "You Lose! "+ "("+sec+" seconds)";
+		win = false;
+		first = false;
 	};
 
 	for(var i=0; i < boundaries.length; i++){
@@ -29,8 +45,9 @@ window.onload = function(){
 
 	end.onmouseover = function(){
 		if(boundaries[0].className !== "boundary youlose"){
-			status.innerHTML = "You Win!";
+			status.innerHTML = "You Win! "+"("+sec+" seconds)";
 			win = true;
+			first = false;
 		}
 	};
 
@@ -43,12 +60,14 @@ window.onload = function(){
 		    boundaries[i].className = "boundary";
 	    }
 	    status.innerHTML = 'Move your mouse over the "S" to begin.';
+	    sec = 0;
 	    win = null;
 	};
 
 	start.onclick = function(){
 		reset();
 		cheatCheck();
+		timer();
 	};
 
 	//Exercize 6
@@ -63,5 +82,6 @@ window.onload = function(){
 
 	start.onmouseover = function(){
 		cheatCheck();
+		if(first == true){ timer(); }
 	};
 };
